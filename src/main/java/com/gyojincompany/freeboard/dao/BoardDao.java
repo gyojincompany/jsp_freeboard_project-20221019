@@ -114,6 +114,8 @@ public class BoardDao {
 	
 	public BoardDto content_view(String boardNum) {//특정 번호의 글 내용 가져오기
 		
+		upHit(boardNum);
+		
 		String sql = "SELECT * FROM freeboard WHERE bid=?";
 		
 		Connection conn = null;
@@ -208,7 +210,7 @@ public class BoardDao {
 		
 	}
 	
-	public void delete(String boardNum) {
+	public void delete(String boardNum) {// 특정 번호의 글 삭제
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -221,6 +223,45 @@ public class BoardDao {
 			pstmt = conn.prepareStatement(sql);//sql 객체 생성
 			
 			pstmt.setString(1, boardNum);//sql 객체 생성			
+			
+			pstmt.executeUpdate();//sql 실행
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if(pstmt != null) {
+					pstmt.close();
+				}
+				if(conn !=null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
+	private void upHit(String bid) {//조회수 1씩 증가
+		
+		String sql = "UPDATE freeboard SET bhit=bhit+1 WHERE bid=?";
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		
+		try {
+			Class.forName(driverName); // jdbc 드라이버 로딩
+			conn = DriverManager.getConnection(url, user, pass);//DB 연동 커넥션 생성
+			pstmt = conn.prepareStatement(sql);//sql 객체 생성
+			
+			pstmt.setString(1, bid);//sql 객체 생성			
 			
 			pstmt.executeUpdate();//sql 실행
 			
