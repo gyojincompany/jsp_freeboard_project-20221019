@@ -208,4 +208,42 @@ public class BoardDao {
 		
 	}
 	
+	public void delete(String boardNum) {
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = "DELETE FROM freeboard WHERE bid=?";
+		
+		try {
+			Class.forName(driverName); // jdbc 드라이버 로딩
+			conn = DriverManager.getConnection(url, user, pass);//DB 연동 커넥션 생성
+			pstmt = conn.prepareStatement(sql);//sql 객체 생성
+			
+			pstmt.setString(1, boardNum);//sql 객체 생성			
+			
+			pstmt.executeUpdate();//sql 실행
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if(pstmt != null) {
+					pstmt.close();
+				}
+				if(conn !=null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
 }
