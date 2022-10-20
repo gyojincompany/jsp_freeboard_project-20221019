@@ -60,6 +60,9 @@ public class BFrontController extends HttpServlet {
 			command = new BWriteCommand();
 			command.execute(request, response);
 			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/list.do");
+			dispatcher.forward(request, response);
+			
 		}  else if(comm.equals("/list.do")) {
 			System.out.println("list.do 요청!");
 			
@@ -69,7 +72,18 @@ public class BFrontController extends HttpServlet {
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/list.jsp");
 			dispatcher.forward(request, response);
+		} else if(comm.equals("/write_form.do")) {
+			System.out.println("write_form.do 요청!");
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/write_form.jsp");
+			dispatcher.forward(request, response);
+		} else if(comm.equals("/content_view.do")) {
+			System.out.println("content_view.do 요청!");
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/content_view.jsp");
+			dispatcher.forward(request, response);
 		}
+		
 	}
 	
 
