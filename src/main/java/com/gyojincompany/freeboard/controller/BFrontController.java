@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.gyojincompany.freeboard.command.BCommand;
 import com.gyojincompany.freeboard.command.BContentCommand;
 import com.gyojincompany.freeboard.command.BListCommand;
+import com.gyojincompany.freeboard.command.BModifyCommand;
 import com.gyojincompany.freeboard.command.BWriteCommand;
 
 /**
@@ -93,6 +94,14 @@ public class BFrontController extends HttpServlet {
 			command.execute(request, response);
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/content_modify.jsp");
+			dispatcher.forward(request, response);
+		} else if(comm.equals("/modify.do")) {
+			System.out.println("modify.do 요청!");
+			
+			command= new BModifyCommand();
+			command.execute(request, response);
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/list.do");
 			dispatcher.forward(request, response);
 		}
 		

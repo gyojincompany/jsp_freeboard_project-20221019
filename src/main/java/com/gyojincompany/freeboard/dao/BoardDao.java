@@ -169,6 +169,43 @@ public class BoardDao {
 	
 	public void modify(String bname, String btitle, String bcontent, String bid) {//특정 번호 글의 내용 수정 하기 
 		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = "UPDATE freeboard SET bname=?, btitle=?, bcontent=? WHERE bid=?";
+		
+		try {
+			Class.forName(driverName); // jdbc 드라이버 로딩
+			conn = DriverManager.getConnection(url, user, pass);//DB 연동 커넥션 생성
+			pstmt = conn.prepareStatement(sql);//sql 객체 생성
+			
+			pstmt.setString(1, bname);
+			pstmt.setString(2, btitle);
+			pstmt.setString(3, bcontent);
+			pstmt.setString(4, bid);
+			
+			pstmt.executeUpdate();//sql 실행
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if(pstmt != null) {
+					pstmt.close();
+				}
+				if(conn !=null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 	}
 	
 }
