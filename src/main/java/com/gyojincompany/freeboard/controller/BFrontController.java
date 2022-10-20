@@ -1,12 +1,16 @@
 package com.gyojincompany.freeboard.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.gyojincompany.freeboard.command.BCommand;
+import com.gyojincompany.freeboard.command.BListCommand;
 import com.gyojincompany.freeboard.command.BWriteCommand;
 
 /**
@@ -48,16 +52,23 @@ public class BFrontController extends HttpServlet {
 		String conPath = request.getContextPath();//context path 가져오기
 		String comm = uri.substring(conPath.length());//전체 URI에서 context 경로 길이만큼 빼기
 		
+		BCommand command = null;
+		
 		if(comm.equals("/write.do")) {			
 			System.out.println("write.do 요청!");
 			
-			BWriteCommand command = new BWriteCommand();
+			command = new BWriteCommand();
 			command.execute(request, response);
 			
 		}  else if(comm.equals("/list.do")) {
 			System.out.println("list.do 요청!");
 			
+			command = new BListCommand();
+			command.execute(request, response);
+			// request객체에 글 리스트가 셋팅됨
 			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/list.jsp");
+			dispatcher.forward(request, response);
 		}
 	}
 	

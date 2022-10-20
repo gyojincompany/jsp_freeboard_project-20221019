@@ -18,7 +18,8 @@ public class BListCommand implements BCommand {
 		ArrayList<BoardDto> dtos = dao.list();
 		//dto들의 컬렉션인 dtos(ArrayList타입)가 반환됨
 		
-		request.setAttribute("list", dtos);
+		request.setAttribute("list", dtos);		
+		
 	}
 
 }
