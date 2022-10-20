@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.gyojincompany.freeboard.command.BCommand;
+import com.gyojincompany.freeboard.command.BContentCommand;
 import com.gyojincompany.freeboard.command.BListCommand;
 import com.gyojincompany.freeboard.command.BWriteCommand;
 
@@ -79,6 +80,9 @@ public class BFrontController extends HttpServlet {
 			dispatcher.forward(request, response);
 		} else if(comm.equals("/content_view.do")) {
 			System.out.println("content_view.do 요청!");
+			
+			command= new BContentCommand();
+			command.execute(request, response);
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/content_view.jsp");
 			dispatcher.forward(request, response);

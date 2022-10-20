@@ -11,24 +11,24 @@
 	<hr>
 	<table width="600" border="1" cellpadding="0" cellspacing="0">
 		<tr>
-			<td>제 목</td>
-			<td>안녕하세요 반갑습니다!</td>			
+			<th align="center" bgcolor="#D4F4FA">제 목</th>
+			<td>${content.btitle }</td>			
 		</tr>
 		<tr>
-			<td>글쓴이</td>
-			<td>홍길동</td>
+			<th align="center" bgcolor="#D4F4FA">글쓴이</th>
+			<td>${content.bname }</td>
 		</tr>		
 		<tr>
-			<td>등록일</td>
-			<td>2022-10-20 19:08:17</td>
+			<th align="center" bgcolor="#D4F4FA">등록일</th>
+			<td>${content.bdate }</td>
 		</tr>
 		<tr>
-			<td>조회수</td>
-			<td>150</td>			
+			<th align="center" bgcolor="#D4F4FA">조회수</th>
+			<td>${content.bhit }</td>			
 		</tr>
-		<tr>
-			<td>내 용</td>
-			<td>저는 홍길동입니다. 가입인사드립니다.</td>			
+		<tr height="200">
+			<th valign="top" align="center" bgcolor="#D4F4FA">내 용</th>
+			<td valign="top">${content.bcontent }</td>			
 		</tr>
 		<tr>
 			<td colspan="2" align="center">
