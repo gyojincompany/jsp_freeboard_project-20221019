@@ -56,6 +56,8 @@ public class BFrontController extends HttpServlet {
 			
 		}  else if(comm.equals("/list.do")) {
 			System.out.println("list.do 요청!");
+			
+			
 		}
 	}
 	

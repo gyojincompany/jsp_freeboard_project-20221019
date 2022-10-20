@@ -3,7 +3,11 @@ package com.gyojincompany.freeboard.dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
+import com.gyojincompany.freeboard.dto.BoardDto;
 
 public class BoardDao {
 	
@@ -12,7 +16,7 @@ public class BoardDao {
 	static String user = "root";
 	static String pass = "12345";
 	
-	public void write(String bname, String btitle, String bcontent) {
+	public void write(String bname, String btitle, String bcontent) {//글쓰기
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -45,6 +49,64 @@ public class BoardDao {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public ArrayList<BoardDto> list() {//글목록 가져오기
+		
+		String sql = "SELECT * FROM freeboard";
+		
+		ArrayList<BoardDto> dtos = new ArrayList<BoardDto>();
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;//select 문이 반환하는 데이터를 담는 객체 선언
+		
+		try {
+			Class.forName(driverName); // jdbc 드라이버 로딩
+			conn = DriverManager.getConnection(url, user, pass);//DB 연동 커넥션 생성
+			pstmt = conn.prepareStatement(sql);//sql 객체 생성
+			
+			rs = pstmt.executeQuery();//sql 실행
+			
+			while(rs.next()) {
+				int bid = rs.getInt("bid");
+				String bname = rs.getString("bname");
+				String btitle = rs.getString("btitle");
+				String bcontent = rs.getString("bcontent");
+				String bdate = rs.getString("bdate");
+				int bhit = rs.getInt("bhit");
+				
+				BoardDto dto = new BoardDto(bid, bname, btitle, bcontent, bdate, bhit);
+//				dto.setBid(bid);
+//				dto.setBname(bname);
+//				dto.setBtitle(btitle);
+//				dto.setBcontent(bcontent);
+//				dto.setBdate(bdate);
+//				dto.setBhit(bhit);
+				dtos.add(dto);				
+			}
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if(pstmt != null) {
+					pstmt.close();
+				}
+				if(conn !=null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return dtos;		
 	}
 	
 }
