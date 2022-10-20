@@ -4,19 +4,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>자유게시판 글보기</title>
+<title>자유게시판 글수정</title>
 </head>
 <body>
-	<h2>자유게시판 글 내용</h2>
+	<h2>자유게시판 글 내용 수정</h2>
 	<hr>
 	<table width="600" border="1" cellpadding="0" cellspacing="0">
+	<form action="modify.do">
 		<tr>
 			<th align="center" bgcolor="#D4F4FA">제 목</th>
-			<td>${content.btitle }</td>			
+			<td><input type="text" value="${content.btitle }" size="80"></td>			
 		</tr>
 		<tr>
 			<th align="center" bgcolor="#D4F4FA">글쓴이</th>
-			<td>${content.bname }</td>
+			<td><input type="text" value="${content.bname }" size="80"></td>
 		</tr>		
 		<tr>
 			<th align="center" bgcolor="#D4F4FA">등록일</th>
@@ -28,15 +29,17 @@
 		</tr>
 		<tr height="200">
 			<th valign="top" align="center" bgcolor="#D4F4FA">내 용</th>
-			<td valign="top">${content.bcontent }</td>			
+			<td valign="top">
+				<textarea rows="12" cols="60">${content.bcontent }</textarea>
+			</td>			
 		</tr>
 		<tr>
 			<td colspan="2" align="center">
-				<input type="button" value="글수정" onclick="javascript:window.location='content_modify.do?bid=${content.bid}'">
-				<input type="button" value="글삭제">
+				<input type="submit" value="수정완료">				
 				<input type="button" value="글목록" onclick="javascript:window.location='list.do'">
 			</td>
 		</tr>
+	</form>
 	</table>
 </body>
 </html>

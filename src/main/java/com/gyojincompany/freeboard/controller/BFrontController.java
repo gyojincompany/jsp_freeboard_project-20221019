@@ -86,6 +86,14 @@ public class BFrontController extends HttpServlet {
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/content_view.jsp");
 			dispatcher.forward(request, response);
+		} else if(comm.equals("/content_modify.do")) {
+			System.out.println("content_modify.do 요청!");
+			
+			command= new BContentCommand();
+			command.execute(request, response);
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/content_modify.jsp");
+			dispatcher.forward(request, response);
 		}
 		
 	}

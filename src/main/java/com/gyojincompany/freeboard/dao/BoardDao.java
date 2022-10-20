@@ -112,7 +112,7 @@ public class BoardDao {
 		return dtos;		
 	}
 	
-	public BoardDto content_view(String boardNum) {
+	public BoardDto content_view(String boardNum) {//특정 번호의 글 내용 가져오기
 		
 		String sql = "SELECT * FROM freeboard WHERE bid=?";
 		
@@ -165,6 +165,10 @@ public class BoardDao {
 		
 		
 		return dto;
+	}
+	
+	public void modify(String bname, String btitle, String bcontent, String bid) {//특정 번호 글의 내용 수정 하기 
+		
 	}
 	
 }
